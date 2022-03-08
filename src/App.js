@@ -20,14 +20,14 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUserFunc } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
+          setCurrentUserFunc({
             id: snapShot.id,
             ...snapShot.data(),
           });
@@ -69,7 +69,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  //create functions that dispatch when called, and pass those functions as props to your component.
+  setCurrentUserFunc: (user) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

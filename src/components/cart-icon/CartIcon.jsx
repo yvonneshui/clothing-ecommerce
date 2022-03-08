@@ -9,17 +9,17 @@ import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg'
 
 import './CartIcon.styles.scss'
 
-function CartIcon({toggleCartHidden,itemCount}) {
+function CartIcon({toggleCartHiddenFunc,itemCount}) {
 	return (
-		<div className="cart-icon" onClick={toggleCartHidden}>
+		<div className="cart-icon" onClick={toggleCartHiddenFunc}>
 			<ShoppingIcon className='shopping-icon'/>
 			<span className="item-count">{itemCount}</span>
 		</div>
 	)
 }
-///Dispatching Actionsto props
+///Dispatching Actions to props
 const mapDispatchToProps=dispatch=>({
-	toggleCartHidden:()=>dispatch(toggleCartHidden())
+	toggleCartHiddenFunc:()=>dispatch(toggleCartHidden())
 })
 
 //passing state to props
