@@ -1,87 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MenuItem from '../menu-item/MenuItem';
 import './Directory.styles.scss'
 
-// #region constants
+import {connect} from 'react-redux'
+import { createStructuredSelector } from "reselect";
 
-// #endregion
+import {selectDirectorySections} from '../../redux/directory/directory-selectors'
 
-// #region styled-components
-
-// #endregion
-
-// #region functions
-
-// #endregion
-
-// #region component
-const propTypes = {};
-
-const defaultProps = {};
-
-/**
- * 
- */
-class Directory extends React.Component {
-constructor(props) {
-	super(props);
-
-	this.state = {
-		sections:[
-        {
-          title: 'hats',
-          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-          id: 1,
-          linkURL:'hats'
-        },
-        {
-          title: 'jackets',
-          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-          id: 2,
-          linkURL:'jackets'
-
-        },
-        {
-          title: 'sneakers',
-          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-          id: 3,
-          linkURL:'sneakers'
-
-        },
-        {
-          title: 'womens',
-          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-          size: 'large',
-          id: 4,
-          linkURL:'womens'
-
-        },
-        {
-          title: 'mens',
-          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-          size: 'large',
-          id: 5,
-          linkURL:'mens'
-
-        }
-      ]
-	};
-}
-
-	render() {
-		return 			(
+function Directory({sections}) {
+		return(
 		<div className="directory-menu">
-			{this.state.sections.map(({id,...otherSectionProps})=>(
+			{sections.map(({id,...otherSectionProps})=>(
 					<MenuItem key={id} {...otherSectionProps}/>
 				))}
 		</div>)
-;
-	}
 }
 
-Directory.propTypes = propTypes;
-Directory.defaultProps = defaultProps;
-// #endregion
-
-export default Directory;
+const mapStateToProps = createStructuredSelector ({
+  sections:selectDirectorySections
+});
+export default connect(mapStateToProps)(Directory)
